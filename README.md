@@ -1,4 +1,19 @@
+# Meta Seeker
+This is the source code of a Chrome Extension which searches up the selected text in the window on Meta AI(integrated using Hugging Face Api) and shows the user the result instantly. This is very useful for use cases such as reading an Article with complex words.
+
+# Setup
+1. Clone the repository locally.
+2. Run the following commands:
+```
+yarn add 
+cp .env.example .env
+```
+3. Add your Hugging Face API Key.
+4. Run ` yarn build `
+5. Now load the dist folder in your "Manage Extensions" page and you're done with the installation!
+
 # React + TypeScript + Vite
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

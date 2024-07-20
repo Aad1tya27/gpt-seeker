@@ -1,14 +1,11 @@
 {
     "manifest_version": 3,
-    "name": "ChatGPT Seeker",
+    "name": "Meta Seeker",
     "version": "1.0.0",
-    "description": "",
+    "description": "Searches the selected text on Meta AI (using Hugging Face API)",
     "permissions": [
         "activeTab",
-        "cookies",
-        "declarativeContent",
         "scripting",
-        "storage",
         "tabs"
     ],
     "host_permissions": [
