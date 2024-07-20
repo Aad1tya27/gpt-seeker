@@ -3,7 +3,8 @@
 // import viteLogo from '/vite.svg'
 // import dotenv from "dotenv"
 import { useEffect, useState } from "react"
-
+import { toggleState } from "../store/store";
+import { useRecoilValue } from "recoil";
 // dotenv.config()
 function useDebounce(input: string, n: number): string {
 
@@ -24,12 +25,13 @@ function useDebounce(input: string, n: number): string {
 }
 
 function App() {
+  const buttonState = useRecoilValue(toggleState);
   // const bodyRef = useRef(document.body)
   const [inputValue, setInputValue] = useState('');
-  const selectedText = useDebounce(inputValue, 1000);
+  const selectedText = useDebounce(inputValue, 500);
   const [output, setOutput] = useState<string>("");
   useEffect(() => {
-
+    
     document.addEventListener("selectionchange", () => {
       const sel = document.getSelection()?.toString();
       // console.log(bodyRef.current, sel)
@@ -56,28 +58,30 @@ function App() {
           console.log(response);
           setOutput(response)
         })
+      }else{
+        setOutput("");
       }
     }
     messageToBackground();
 
   }, [selectedText])
 
-  return (
+  return !buttonState?
+  <></> 
+  :
+  (
     <>
-      <div className='justify-around border-[5px] border-slate-900 rounded-lg 
-       text-white items-center flex flex-col bg-opacity-40 bg-gradient-to-b from-slate-800 to-slate-700 w-[300px] h-[400px]
-       top-0 right-0 fixed py-2' >
+      <div className='p-2 py-6 border-[2px] border-[#1e1e1e] rounded-lg 
+       text-white items-center flex flex-col bg-opacity-90  bg-[#252525] w-[300px] h-[400px]
+       top-0 right-0 fixed gap-3' >
 
-        <div className="input flex flex-col items-center justify-center">
-          <h1 className="text-[16px] leading-6 text-white text-center">Selected Text:</h1>
-          <textarea disabled name='searchContent' className=' text-sm h-[100px] text-center break-words
-            overflow-y-auto rounded-md bg-opacity-50 bg-white  text-black border-[1px] border-slate-500' value={inputValue} />
-        </div>
+        <textarea disabled name='searchContent' className='poppins-regular text-sm h-[60px]  break-words
+            overflow-y-auto p-2 px-4 rounded-md bg-[#141414] bg-opacity-95 text-gray-300 border-none' value={inputValue.length ? inputValue : "Select text to search ..."} />
 
-        <div className="output flex flex-col items-center justify-center">
-          <h1 className="text-[16px] text-white text-center">Search Result:</h1>
-          <textarea disabled name='searchContent' className='text-sm h-[100px] text-center break-words
-         overflow-y-auto rounded-md bg-opacity-50 bg-white text-black border-[1px] border-slate-500' value={output} />
+        <div className="output flex gap-4 flex-col items-center justify-center min-h-[75%]">
+          <h1  className="text-[16px] text-white">{output?"Search Result:":""}</h1>
+          <textarea disabled name='searchContent' className='text-sm h-[80%] poppins-regular break-words
+         overflow-y-auto rounded-md bg-transparent text-gray-100 px-2 border-none' value={output} />
         </div>
 
       </div>

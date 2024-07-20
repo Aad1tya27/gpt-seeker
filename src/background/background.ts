@@ -12,17 +12,17 @@ console.log("hey")
 // })
 
 chrome.runtime.onMessage.addListener((message: any, _sender: chrome.runtime.MessageSender, sendResponse: (response?: string) => void) => {
-    console.log("lesgo ", message);
+    // console.log("lesgo ", message);
     async function main(): Promise<void> {
         let result = "";
         for await (const chunk of inference.chatCompletionStream({
             model: "meta-llama/Meta-Llama-3-8B-Instruct",
-            messages: [{ role: "user", content: message.message + " explain in not more than 2 sentences" }],
+            messages: [{ role: "user", content: message.message + " (explain in not more than 2 sentences)" }],
             max_tokens: 500,
         })) {
             result += chunk.choices[0]?.delta?.content || "";
         }
-        console.log(result);
+        // console.log(result);
         sendResponse(result);
     }
     main();

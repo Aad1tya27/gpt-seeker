@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-
+import { RecoilRoot } from "recoil"
 // (async ()=>{
 
 // })()
@@ -20,5 +20,7 @@ root.style.backgroundColor = "transparent"; // Ensure visibility against the bac
 document.body.appendChild(root);
 
 ReactDOM.createRoot(root).render(
-    <App />
+    <RecoilRoot>
+        <App />
+    </RecoilRoot>
 );
